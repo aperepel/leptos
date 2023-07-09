@@ -357,9 +357,11 @@ where
 
             #[cfg(not(all(target_arch = "wasm32", feature = "web")))]
             {
-                let new_child = child_fn().into_view();
+                leptos_reactive::create_isomorphic_effect(move |_| {
+                    let new_child = child_fn().into_view();
 
-                **child.borrow_mut() = Some(new_child);
+                    **child.borrow_mut() = Some(new_child);
+                });
             }
 
             component
