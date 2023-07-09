@@ -368,11 +368,12 @@ fn root_element_to_tokens_ssr(
         };
         let stmts_for_ide = stmts_for_ide.into_iter();
         Some(quote! {
-        {
-            #(#stmts_for_ide)*
-            #(#exprs_for_compiler)*
-            ::leptos::HtmlElement::from_chunks(#full_name, [#(#chunks),*])#view_marker
-        }
+            #[allow(unused_braces)]
+            {
+                #(#stmts_for_ide)*
+                #(#exprs_for_compiler)*
+                ::leptos::HtmlElement::from_chunks(#full_name, [#(#chunks),*])#view_marker
+            }
         })
     }
 }
@@ -1087,7 +1088,7 @@ fn element_to_tokens(
             Some(class) => {
                 quote! {
                     .classes(
-                        #[allow(unused_braces)]
+                        //#[allow(unused_braces)]
                         #class
                     )
                 }
@@ -1408,7 +1409,7 @@ pub(crate) fn slot_to_tokens(
                 .unwrap_or_else(|| quote! { #name });
 
             quote! {
-                .#name(#[allow(unused_braces)] #value)
+                .#name(#[allow(unused_braces)] {#value})
             }
         });
 
@@ -1548,7 +1549,7 @@ pub(crate) fn component_to_tokens(
                 .unwrap_or_else(|| quote! { #name });
 
             quote! {
-                .#name(#[allow(unused_braces)] #value)
+                .#name(#[allow(unused_braces)] {#value})
             }
         });
 
