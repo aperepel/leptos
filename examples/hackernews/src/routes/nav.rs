@@ -3,7 +3,7 @@ use leptos_router::*;
 
 #[component]
 pub fn Nav() -> impl IntoView {
-    view! { cx,
+    view! {
         <header class="header">
             <nav class="inner">
                 <A href="/home">
