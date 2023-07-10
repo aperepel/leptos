@@ -18,13 +18,13 @@ pub fn App() -> impl IntoView {
     //let id = use_context::<String>();
     provide_meta_context();
     view! {
-        
+
         <Link rel="shortcut icon" type_="image/ico" href="/favicon.ico"/>
         <Stylesheet id="leptos" href="/pkg/errors_axum.css"/>
         <Router fallback=|| {
             let mut outside_errors = Errors::default();
             outside_errors.insert_with_default_key(AppError::NotFound);
-            view! { 
+            view! {
                 <ErrorTemplate outside_errors/>
             }
             .into_view()
@@ -46,7 +46,7 @@ pub fn ExampleErrors() -> impl IntoView {
     let generate_internal_error =
         create_server_action::<CauseInternalServerError>();
 
-    view! { 
+    view! {
         <p>
             "These links will load 404 pages since they do not exist. Verify with browser development tools: " <br/>
             <a href="/404">"This links to a page that does not exist"</a><br/>
